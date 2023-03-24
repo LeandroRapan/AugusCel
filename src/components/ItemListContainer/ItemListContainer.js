@@ -8,8 +8,12 @@ const ItemListContainer = ({ greeting }) => {
    const [products, setProducts]= useState([])
    const {categoryId} = useParams() 
    const [loading, setLoading]= useState(true)
+
+
     useEffect(
         ( )=>{
+
+            // del asyncMok se traen las funciones  getProducts y getProductsById. El use effect empieza con una condicion donde se comprueba si hay una categoria para la CanvasGradient, sino carga toda la lista con getProducts.
             setLoading(true)
             const asyncCategory= categoryId? getProductsByCategory: getProducts
               asyncCategory(categoryId)   

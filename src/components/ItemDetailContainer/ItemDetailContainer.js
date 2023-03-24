@@ -9,13 +9,13 @@ const ItemDetailContainer =() =>{
     const [product, setProduct] = useState(null)
     // como es una llamada externa y quiero protegerla de cambios de estado uso un useEffect
    const {itemId}= useParams();
-   
+   //use effect para cargar los productos y cambiar el state, lo que generara un render
     useEffect (()=> {
         getProductById(itemId)
         .then(res=>{setProduct(res)})
         .catch(error =>{console.log(error)})
     }, [])
-
+   //generación del div en el que estaá itemDetail
     return(
         <div>
             <h1>Detalle de productos</h1>
@@ -26,7 +26,3 @@ const ItemDetailContainer =() =>{
     
 }
 export default ItemDetailContainer
-  /* implemento una condicion para que no haya conflicto con el estado null de productos */
-//   product ? () : (
-//     <p>Cargando...</p>
-//   )

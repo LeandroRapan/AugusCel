@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
 // estilos ccs. Puede que hubiera sido mejor haciendo un archivo css aparte, pero queria comprobar esta manera.
 // lo hice asi tambien por que podiendo los estilos en linea crasheaba;
 // aparte, no sabia si era conveniente hacer un archivo css para item otro para item list otro para itemlist CSSContainerRule, o si era mejor poner todo en el css de app
@@ -52,24 +52,31 @@ const itemLinkHoverStyles = {
 };
 //ACA SIGUE EL CODIGO
 // Componente Item
+
+
 const Item = ({ id, name, price, img }) => {
+
+  //este estado está para q cambie el boton con un hover, No se si sera la mejor manera
+  const [buttonStyles, setButtonStyles] = useState(itemLinkStyles);
   return (
     <div style={itemStyles}>
       <img src={img} style={itemImageStyles} alt={name} />
       <h2 style={itemNameStyles}>{name}</h2>
       <h3 style={itemPriceStyles}>${price}</h3>
+      {/* generacion del link/boton detalles */}
       <Link
         to={`/item/${id}`}
-        style={itemLinkStyles}
+
+        // siguiente parte para agregar el hover al boton
+        style={buttonStyles}
         onMouseEnter={(e) => {
-          e.target.style = { ...itemLinkStyles, ...itemLinkHoverStyles };
+          setButtonStyles({ ...itemLinkStyles, backgroundColor: itemLinkHoverStyles.backgroundColor });
         }}
         onMouseLeave={(e) => {
-          e.target.style = itemLinkStyles;
+          setButtonStyles(itemLinkStyles);
         }}
-      >
-        Detalles
-      </Link>
+       >Detalles
+     </Link>
     </div>
   );
 };

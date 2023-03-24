@@ -20,6 +20,8 @@ const NavBar = () => {
                 <NavLink  className="nav-item btn  btn-lg" style={{color:"#E6E2C3"}}>Sobre nosotros</NavLink>
                 <NavLink  className="nav-item btn  btn-lg" style={{color:"#E6E2C3"}}>Cómo comprar</NavLink>
                 <NavLink  className="nav-item btn  btn-lg" style={{color:"#E6E2C3"}}>Envios</NavLink>
+
+                {/* EL CARTWIDGET */}
                 <CartWidget  />
             </div>
             
