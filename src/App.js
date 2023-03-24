@@ -14,7 +14,8 @@ function App() {
       <Routes>
       {/* llamada itemListContainer y promp con un greeting */}
       <Route path='/' element={<ItemListContainer greeting={'hola'} />}/>
-      <Route path='item:itemId' element={<ItemDetailContainer/>} />
+      <Route path='/category/:categoryId' element={<ItemListContainer greeting={'productos filtrados por categoria'}/>} />
+      <Route path='item/:itemId' element={<ItemDetailContainer/>} />
       </Routes>
       </BrowserRouter> 
     </div>

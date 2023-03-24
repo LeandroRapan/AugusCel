@@ -1,6 +1,7 @@
 import { useState,useEffect  } from "react"
 import {getProductById} from "../../asyncMock"
 import {useParams} from 'react-router-dom'
+import ItemDetail from "../ItemDetail/ItemDetail"
 
 
 const ItemDetailContainer =() =>{
@@ -18,20 +19,14 @@ const ItemDetailContainer =() =>{
     return(
         <div>
             <h1>Detalle de productos</h1>
-            {/* implemento una condicion para que no haya conflicto con el estado null de productos */}
-    {product ? (
-        <div>
-        <h2>{product.name}</h2>
-        <img src={product.img} alt={product.name} style={{width: 200}}/>
-        <p>Precio: ${product.price}</p>
-        <p>Stock:{product.stock}</p>
-        <p>Descripcion: {product.description}</p>
-      </div>
-    ) : (
-      <p>Cargando...</p>
-    )}
+            <ItemDetail {...product}/>
+    
   </div>
 );
     
 }
 export default ItemDetailContainer
+  /* implemento una condicion para que no haya conflicto con el estado null de productos */
+//   product ? () : (
+//     <p>Cargando...</p>
+//   )

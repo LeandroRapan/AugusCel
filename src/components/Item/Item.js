@@ -1,0 +1,77 @@
+import { Link } from "react-router-dom";
+
+// estilos ccs. Puede que hubiera sido mejor haciendo un archivo css aparte, pero queria comprobar esta manera.
+// lo hice asi tambien por que podiendo los estilos en linea crasheaba;
+// aparte, no sabia si era conveniente hacer un archivo css para item otro para item list otro para itemlist CSSContainerRule, o si era mejor poner todo en el css de app
+
+
+const itemStyles = {
+  width: "200px",
+  border: "1px solid #ccc",
+  borderRadius: "10px",
+  padding: "20px",
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  margin:"10px"
+};
+
+const itemImageStyles = {
+  width: "100%",
+  height: "200px",
+  objectFit: "cover",
+  marginBottom: "10px",
+};
+
+const itemNameStyles = {
+  fontSize: "1.2rem",
+  margin: 0,
+  marginBottom: "auto",
+};
+
+const itemPriceStyles = {
+  fontSize: "1.1rem",
+  margin: 0,
+  marginBottom: "auto",
+};
+
+const itemLinkStyles = {
+  backgroundColor: "#227C70",
+  color: "#fff",
+  border: "none",
+  padding: "10px 20px",
+  borderRadius: "5px",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  marginTop: "auto",
+};
+
+const itemLinkHoverStyles = {
+  backgroundColor: "#1A513E",
+};
+//ACA SIGUE EL CODIGO
+// Componente Item
+const Item = ({ id, name, price, img }) => {
+  return (
+    <div style={itemStyles}>
+      <img src={img} style={itemImageStyles} alt={name} />
+      <h2 style={itemNameStyles}>{name}</h2>
+      <h3 style={itemPriceStyles}>${price}</h3>
+      <Link
+        to={`/item/${id}`}
+        style={itemLinkStyles}
+        onMouseEnter={(e) => {
+          e.target.style = { ...itemLinkStyles, ...itemLinkHoverStyles };
+        }}
+        onMouseLeave={(e) => {
+          e.target.style = itemLinkStyles;
+        }}
+      >
+        Detalles
+      </Link>
+    </div>
+  );
+};
+
+export default Item;
