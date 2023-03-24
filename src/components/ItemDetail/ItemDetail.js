@@ -1,4 +1,6 @@
 const ItemDetail = ({name, price, img, description, stock}) => {
+
+  // Recive los datos via prompt de itemDetailContainer que a su vez lo obtiene de asyncMock
     return(
     <div>
     <h2>{name}</h2>

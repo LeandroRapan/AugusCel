@@ -11,7 +11,7 @@ const NavBar = () => {
            <Link to="/">
               <img src="../assets/appleTouchLogoBlack.jpg" className="Navbar-brand" alt="logo" style={{width:70, borderRadius:50}}/>
            </Link>
-            {/* container de botones */}
+            {/* container de botones */} 
             <div className="container-fluid"  id="navbarBasic">
                 <NavLink  to='/category/celular' className="nav-item btn  btn-lg" id="btn" style={{color:"#E6E2C3"}}>Celulares</NavLink>
                 <NavLink to='/category/notebook' className="nav-item btn  btn-lg" style={{color:"#E6E2C3"}}>Notebooks</NavLink>
