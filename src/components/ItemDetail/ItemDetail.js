@@ -1,5 +1,13 @@
+import ItemCount from "../ItemCount/ItemCount"
+import { useContext } from "react"
+import { CartContext } from "../../App"
+import Counter from "../Counter/Counter"
+
+
+
 const ItemDetail = ({name, price, img, description, stock}) => {
 
+  const {addItem} = useContext(CartContext)
   // Recive los datos via prompt de itemDetailContainer que a su vez lo obtiene de asyncMock
     return(
     <div>
@@ -8,7 +16,15 @@ const ItemDetail = ({name, price, img, description, stock}) => {
     <p>Precio: ${price}</p>
     <p>Stock:{stock}</p>
     <p>Descripcion: {description}</p>
-  </div>)
+  
+    
+  
+  <footer>
+ <Counter />
+ </footer>
+ </div>
+  )
+  
 }
 
 export default ItemDetail
