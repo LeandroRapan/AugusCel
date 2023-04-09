@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useContext } from "react";
-import { CartContext } from "../../App";
+import { CartContext } from '../../context/CartContext/CartContext';;
 // estilos ccs. Puede que hubiera sido mejor haciendo un archivo css aparte, pero queria comprobar esta manera.
 // lo hice asi tambien por que podiendo los estilos en linea crasheaba;
 // aparte, no sabia si era conveniente hacer un archivo css para item otro para item list otro para itemlist CSSContainerRule, o si era mejor poner todo en el css de app
