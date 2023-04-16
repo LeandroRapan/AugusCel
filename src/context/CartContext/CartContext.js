@@ -8,6 +8,15 @@ export const CartProvider =({children}) => {
      //   chequeo de si está en el carrito
         if(!isInCart(productToAdd.id)){
      setCart(prev=>[...prev,productToAdd])
+     } else {
+            const updatedCart = cart.map( prod =>{
+            if(prod.id === productToAdd.id){
+              return {...prod, quantity: productToAdd.quantity}
+            }else{
+              return prod
+            }
+            }  )
+            setCart(updatedCart)
      }
     }
     //  iteracion sobre el carrito
@@ -21,13 +30,26 @@ export const CartProvider =({children}) => {
      return totalQuantity
     }
    const totalQuantity= getTotalQuantity()
+
+   //chequeo de precio
+   const getTotal=()=>{
+    let total= 0
+    cart.forEach(prod=>{
+       total+=prod.quantity * prod.price
+       console.log(prod)
+     })
+    return total
+   }
+  const total= getTotal()
+   
+  //  borrador de elementos
    const removeItem =(id)=>{
     const cartUpdated = cart.filter(prod=> prod.id!== id)
     setCart(cartUpdated)
    }
  return (
      /* componente de context que envuelve a los componentes hermanos  */
- <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart }}>
+ <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart, total }}>
  {children}
  </CartContext.Provider>
  )

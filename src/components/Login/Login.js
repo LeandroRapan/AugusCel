@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useAuth } from "../../context/CartContext/AuthContext"
+import { useAuth } from "../../context/AuthContext/AuthContext"
 
 const Login = () => {
     //GUARDAR DATOS DEL USUARIO EN UNA COLECCION PARA DESPUES PODER USAR EL ID DEL USUARIO UUID Y AGREGARLO A LA ORDEN DE COMPRAS

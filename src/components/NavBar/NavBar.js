@@ -1,9 +1,9 @@
 import CartWidget from "../CartWidget/CartWidget"
 import "./NavBar.css"
 import {Link, NavLink} from 'react-router-dom'
-import { useAuth } from "../../context/CartContext/AuthContext"
+import { useAuth } from "../../context/AuthContext/AuthContext"
 import { useEffect, useState } from "react"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../services/firebase/firebaseConfig"
 // NavBar con estilos de bootstrap y estilos css en linea
 // no me gusta mucho los estilos en linea  Hice un NavBar.css por que bootstrap se me esta resistiendo, pero tener parte en un archivo y parte en linea me parece desprolijo. Lo añadi al git ignore y lo voy a seguir trabajando por separados
@@ -11,13 +11,17 @@ const NavBar = () => {
     const [categories, setCategories] = useState([])
     const { user }= useAuth()
     useEffect(()=> {
-    const categoriesRef = collection(db, 'categories')
-    getDocs(categoriesRef).then(
+    const categoriesRef = query(collection(db, 'categories'), orderBy('order'))
+    
+    getDocs(categoriesRef)
+    .then(
         snapshot =>{
             const categoriesAdapted = snapshot.docs.map(
                 doc => {
-                    const data = doc.data
-                    return {id:doc.id, ...data}
+                    const data = doc.data()
+                    
+                    return {id: doc.id, ...data}
+                    
                 }
             )
             setCategories(categoriesAdapted)

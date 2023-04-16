@@ -21,7 +21,7 @@ const {setNotification} = useNotification()
   console.log(productToAdd)
   setQuantity(quantity)
   addItem(productToAdd)
-  setNotification('success', `agregado al carrito ${quantity} ${name}`)
+  setNotification('success', `agregado al carrito ${quantity} ${name}`, 2)
  }
   
 //  Recive los datos via prompt de itemDetailContainer que a su vez lo obtiene de asyncMock

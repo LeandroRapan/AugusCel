@@ -11,11 +11,12 @@ const ItemDetailContainer =() =>{
    const {itemId}= useParams();
    //use effect para cargar los productos y cambiar el state, lo que generara un render
     useEffect (()=> {
-        const productRef = doc(db,'products, itemId')
+        const productRef = doc(db,'products', itemId)
         getDoc(productRef)
         .then(snapshot=>{
-            const data = snapshot.data
+            const data = snapshot.data()
             const productAdapted = { id: snapshot.id, ...data}
+            setProduct(productAdapted)
         })
         // getProductById(itemId)
         // .then(res=>{setProduct(res)})
