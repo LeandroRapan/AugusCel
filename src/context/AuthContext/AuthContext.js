@@ -5,7 +5,7 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
     const [user, setUser]= useState(null)
-    console.log(user)
+    
     // Llamada a useNavigate para ir a "/"
     const navigate = useNavigate()
     const {setNotification}= useNotification()

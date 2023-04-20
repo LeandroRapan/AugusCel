@@ -47,9 +47,16 @@ export const CartProvider =({children}) => {
     const cartUpdated = cart.filter(prod=> prod.id!== id)
     setCart(cartUpdated)
    }
+
+
+
+   const clearCart = () => {
+    setCart([])
+}
+
  return (
      /* componente de context que envuelve a los componentes hermanos  */
- <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart, total }}>
+ <CartContext.Provider value={{ cart, addItem,totalQuantity, removeItem, isInCart, total, clearCart }}>
  {children}
  </CartContext.Provider>
  )

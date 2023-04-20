@@ -44,3 +44,17 @@ function App() {
 }
 
 export default App;
+
+////agregar loadings
+////hacer el formularo en el cart o en el checkout
+////optimizar
+////como proteger datos sensibles 7.40
+////variables de entorno 10.20
+//// readme
+////migracion de tecnologia 33
+///firestore 36
+//115 creacion des un custom hook para obtener datos y q lo utilizen diferentes componentes
+///adaptar parametros de los objetos 150 + o-
+
+
+///authLogin

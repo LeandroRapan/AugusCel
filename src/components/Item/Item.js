@@ -59,7 +59,7 @@ const itemLinkHoverStyles = {
 const Item = ({ id, name, price, img }) => {
 
   const value = useContext(CartContext)
-  console.log(value)
+  
   //este estado está para q cambie el boton con un hover, No se si sera la mejor manera
   const [buttonStyles, setButtonStyles] = useState(itemLinkStyles);
   return (
