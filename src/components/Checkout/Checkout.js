@@ -10,10 +10,11 @@ const Checkout = () => {
     const [loading, setLoading] = useState(false)
     const [modoPago, setModoPago] = useState("");
     const { cart, total, clearCart } = useContext(CartContext)
+    
 
 
     const { setNotification } = useNotification()
-
+    
     function cambiarFormulario(e) {
         setModoPago(e.target.value);
     }
@@ -24,7 +25,7 @@ const Checkout = () => {
         formCheckData.preventDefault()
 
 
-       console.log(formCheckData)
+    
 //  const payment= {
 //                     payment: formCheckData.target.payment.value,
 //                     number: formCheckData.target.creditNumber.value,
@@ -136,21 +137,21 @@ if (formCheckData.target.payment.value === 'credit') {
       <h2>Checkout</h2>
       <form onSubmit={(formCheckData)=>handleConfirm(formCheckData)}>
         <label htmlFor="nombre">Nombre completo:</label>
-        <input type="text" id="nombre" name="name" required /><br />
+        <input type="text" id="nombre" name="name" defaultValue={'mi nombre'} required /><br />
 
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required /><br />
+        <input type="email" id="email" name="email" defaultValue={'mi@mail.com'} required /><br />
 
         <label htmlFor="address">Dirección:</label>
-        <input type="text" id="address" name="address" required /><br />
+        <input type="text" id="address" name="address" defaultValue={'mi casa'} required /><br />
 
         <label htmlFor="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="phone" required /><br />
+        <input type="tel" id="telefono" name="phone" defaultValue={4539000} required /><br />
 
 
 
         <label htmlFor="payment">Modo de pago:</label>
-        <select id="payment" name="payment" onChange={cambiarFormulario} required>
+        <select id="payment" name="payment" onChange={cambiarFormulario} defaultValue='cash' required>
           <option value="">Selecciona una opción</option>
           <option value="cash">Efectivo contra reembolso o transferencia bancaria</option>
           <option value="credit">Tarjeta </option>
