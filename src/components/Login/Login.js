@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "../../context/AuthContext/AuthContext"
 import { auth } from "../../services/firebase/firebaseConfig"
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 
 
 const Login = () => {
@@ -15,8 +15,6 @@ const Login = () => {
     const { login } = useAuth()
       
      
-       
-
 
 
 
@@ -46,21 +44,38 @@ const Login = () => {
         //FUNCION FIREBASE CREAR USUARIO
       createUserWithEmailAndPassword(auth, newUser, newPass)
       .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    console.log('usuario creado')
-    
-    // ...
+        // Signed in
+        const user = userCredential.user;
+        console.log('usuario creado')
+        login(newUser, newPass)
+        // ...
        })
      .catch((error) => {console.log(error)
-     const errorCode = error.code;
-     const errorMessage = error.message;
-    //x  ..
-  });
-
-       login(newUser, newPass)
-        
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      //x  ..
+     });   
     }
+    const googleLogin= async ()=> { 
+        
+    const provider = new GoogleAuthProvider();
+     try {
+        
+         const credentials = await signInWithPopup(auth, provider)
+         let usrGoogle= credentials.user.displayName
+         console.log(credentials)
+         login(usrGoogle, '')
+         console.log(auth)
+     } catch (error) {
+        console.log(error)
+     }
+
+       
+    
+    }
+
+
+
     return (
         <div>
             <h1>Login </h1>
@@ -91,6 +106,7 @@ const Login = () => {
                 <button>Login</button>
             </form>
             </div>
+            <button type="button" id='googleLogin' className="btn btn-info" onClick={googleLogin}>Google</button>
         </div>
         
     )
