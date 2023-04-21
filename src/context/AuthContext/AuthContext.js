@@ -5,20 +5,24 @@ const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
     const [user, setUser]= useState(null)
+    const [email, setEmail] = useState(null)
     
     // Llamada a useNavigate para ir a "/"
     const navigate = useNavigate()
     const {setNotification}= useNotification()
-    const login = (username, password) => {
-        setUser({username})
+    const login = (username, password, email) => {
+        setEmail(email)
+        
+        setUser(username)
         navigate('/')
         setNotification('success', `Bienvenido ${username}`, 5)
     }
     const logout =() =>{
         setUser(null)
     }
+    
     return (
-        <AuthContext.Provider value={{user, login, logout}}>
+        <AuthContext.Provider value={{user, login, logout, email}}>
             {children}
         </AuthContext.Provider>
     )

@@ -8,6 +8,7 @@ const Login = () => {
     
     //GUARDAR DATOS DEL USUARIO EN UNA COLECCION PARA DESPUES PODER USAR EL ID DEL USUARIO UUID Y AGREGARLO A LA ORDEN DE COMPRAS
     const [email, setEmail] = useState('')
+    const [newEmail, setNewEmail] = useState('')
     const [password, setPassword] = useState('')
     const [newUser, setNewUser] = useState('')
     const [newPass, setNewPass] = useState('')
@@ -25,9 +26,10 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in
-    const user = userCredential.user;
-    console.log(user)
-    login(email, password)
+    
+    let user = userCredential.user
+    
+    login(newUser, password, email)
     // ...
   })
   .catch((error) => {
@@ -42,12 +44,13 @@ const Login = () => {
     const handleNewUser = (e) => {
         e.preventDefault()
         //FUNCION FIREBASE CREAR USUARIO
-      createUserWithEmailAndPassword(auth, newUser, newPass)
+      createUserWithEmailAndPassword(auth, newEmail, newPass)
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        let user = userCredential.user;
         console.log('usuario creado')
-        login(newUser, newPass)
+        setEmail(newUser)
+        login(newUser, newPass, newEmail)
         // ...
        })
      .catch((error) => {console.log(error)
@@ -62,10 +65,12 @@ const Login = () => {
      try {
         
          const credentials = await signInWithPopup(auth, provider)
+                  
          let usrGoogle= credentials.user.displayName
-         console.log(credentials)
-         login(usrGoogle, '')
-         console.log(auth)
+         let emailGoogle =credentials.user.email
+         
+         login(usrGoogle, '', emailGoogle)
+         
      } catch (error) {
         console.log(error)
      }
@@ -81,7 +86,7 @@ const Login = () => {
             <h1>Login </h1>
             <form onSubmit={handleLogin}>
                 <label>
-                    Usuario
+                    Email
                 <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                 </label>
                 <label>
@@ -96,12 +101,16 @@ const Login = () => {
             <h1>NewUser</h1>
             <form onSubmit={handleNewUser}>
                 <label>
-                   email
+                   Nombre
                 <input type="text" value={newUser} onChange={(e)=>setNewUser(e.target.value)}/>
                 </label>
                 <label>
+                   email
+                <input type="text" value={newEmail} onChange={(e)=>setNewEmail(e.target.value)}/>
+                </label>
+                <label>
                     Contraseña
-                <input value ={newPass} onChange={(e)=> setNewPass(e.target.value)}/>
+                <input type="password"value ={newPass} onChange={(e)=> setNewPass(e.target.value)}/>
                 </label>
                 <button>Login</button>
             </form>

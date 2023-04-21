@@ -4,6 +4,7 @@ import { db } from '../../services/firebase/firebaseConfig'
 import { documentId, getDocs, query, collection, where, writeBatch, addDoc } from 'firebase/firestore'
 import { useNotification } from '../../notification/Notification'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext/AuthContext'
 
 const Checkout = () => {
     const [orderId, setOrderId] = useState('')
@@ -11,8 +12,9 @@ const Checkout = () => {
     const [modoPago, setModoPago] = useState("");
     const { cart, total, clearCart } = useContext(CartContext)
     
-
-
+    const { user, email } = useAuth()
+console.log(user)
+console.log(email)
     const { setNotification } = useNotification()
     
     function cambiarFormulario(e) {
@@ -66,7 +68,7 @@ if (formCheckData.target.payment.value === 'credit') {
                 total: total,
                
             }
-          console.log(objOrder)
+         
             const ids = cart.map(prod => prod.id)
 
           // consulta a la base de datos discriminado por los id del carrrito que obtiene de la const ids arriba
@@ -99,7 +101,7 @@ if (formCheckData.target.payment.value === 'credit') {
                 }
             })
             //si hay algo en el array de productos fuera de stock el else muestra un error, sino genera la orden actualizando la base de datos
-           console.log(objOrder)
+           
             if(outOfStock.length === 0) {
                 batch.commit()
                 
@@ -134,7 +136,14 @@ if (formCheckData.target.payment.value === 'credit') {
     return (
    
     <div className="checkout">
-      <h2>Checkout</h2>
+      <h1>Checkout</h1>
+      {
+      user?<h2>  {`Hola ${user}, para estar seguros, tu email es: ${email}`}</h2>
+      : <h2>{`Para estar seguros, tu email es: ${email}`}</h2>
+      }
+        
+      
+      
       <form onSubmit={(formCheckData)=>handleConfirm(formCheckData)}>
         <label htmlFor="nombre">Nombre completo:</label>
         <input type="text" id="nombre" name="name" defaultValue={'mi nombre'} required /><br />
