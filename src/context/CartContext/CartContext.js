@@ -1,8 +1,15 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const CartContext = createContext(0)
+const localGet = JSON.parse(localStorage.getItem('carrito') || '[]')
+// const localSet =(data) => localStorage.setItem('carrito',JSON.stringify(data))
 export const CartProvider =({children}) => {
-    const [cart, setCart]= useState([])
+    const [cart, setCart]= useState([localGet])
+    useEffect(()=>{
+      // localSet(cart)
+      localStorage.setItem('carrito',JSON.stringify(cart))
+
+    }, [cart])
      // funcion para agregar productos al carrito
     const addItem =(productToAdd)=>{
      //   chequeo de si está en el carrito
@@ -17,8 +24,9 @@ export const CartProvider =({children}) => {
             }
             }  )
             setCart(updatedCart)
-            local(cart)
+           
      }
+      
     }
     //  iteracion sobre el carrito
     const isInCart = (id) =>{cart.some(prod => prod.id === id)}
@@ -42,20 +50,20 @@ export const CartProvider =({children}) => {
     return total
    }
   const total= getTotal()
-   
+    
   //  borrador de elementos
    const removeItem =(id)=>{
     const cartUpdated = cart.filter(prod=> prod.id!== id)
     setCart(cartUpdated)
-    localSet(cart)
+    
    }
 
 
 
    const clearCart = () => {
     setCart([])
-
-    const localSet =(data) => localStorage.setItem('carrito',JSON.stringify(data))
+console.log(cart)
+   
 }
 
  return (
