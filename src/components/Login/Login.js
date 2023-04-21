@@ -29,7 +29,7 @@ const Login = () => {
     
     let user = userCredential.user
     
-    login(newUser, password, email)
+    login(email, password, email)
     // ...
   })
   .catch((error) => {

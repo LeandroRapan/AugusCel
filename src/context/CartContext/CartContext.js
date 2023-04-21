@@ -4,32 +4,39 @@ export const CartContext = createContext(0)
 const localGet = JSON.parse(localStorage.getItem('carrito') || '[]')
 // const localSet =(data) => localStorage.setItem('carrito',JSON.stringify(data))
 export const CartProvider =({children}) => {
-    const [cart, setCart]= useState([localGet])
+    const [cart, setCart]= useState(localGet)
     useEffect(()=>{
       // localSet(cart)
       localStorage.setItem('carrito',JSON.stringify(cart))
 
     }, [cart])
      // funcion para agregar productos al carrito
-    const addItem =(productToAdd)=>{
+   
+     const addItem =(productToAdd)=>{
      //   chequeo de si está en el carrito
         if(!isInCart(productToAdd.id)){
      setCart(prev=>[...prev,productToAdd])
      } else {
             const updatedCart = cart.map( prod =>{
-            if(prod.id === productToAdd.id){
-              return {...prod, quantity: productToAdd.quantity}
-            }else{
-              return prod
+              if(prod.id === productToAdd.id){
+               let newQuantity = prod. quantity + productToAdd.quantity
+               if (newQuantity> prod.stock){newQuantity = prod.stock}
+               
+               return {...prod, quantity: newQuantity}
+              
+
+
+              }else{
+                return prod}
             }
-            }  )
+             )
             setCart(updatedCart)
            
      }
       
     }
     //  iteracion sobre el carrito
-    const isInCart = (id) =>{cart.some(prod => prod.id === id)}
+    const isInCart = (id) =>{return cart.some(prod => prod.id === id)}
     // chequeo de cantidad
     const getTotalQuantity=()=>{
      let totalQuantity= 0

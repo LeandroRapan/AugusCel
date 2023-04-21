@@ -10,21 +10,21 @@ import ItemCount from "../ItemCount/ItemCount"
 
  const ItemDetail = ({id, name, price, img, description, stock}) => {
    const [quantity, setQuantity]= useState(0)
-   const {addItem} = useContext(CartContext)
+   const {addItem, isInCart} = useContext(CartContext)
 const {setNotification} = useNotification()
-
+console.log(isInCart('o4ODW3HtNTY0t5Sm2p7z'))
   const handleOnAdd = (quantity)=>{
     const productToAdd = {
     id, name, price, quantity 
     
   }
-  console.log(productToAdd)
+  
   setQuantity(quantity)
   addItem(productToAdd)
   setNotification('success', `agregado al carrito ${quantity} ${name}`, 2)
  }
   
-//  Recive los datos via prompt de itemDetailContainer que a su vez lo obtiene de asyncMock
+
 
 return(
 
