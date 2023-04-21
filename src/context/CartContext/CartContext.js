@@ -17,6 +17,7 @@ export const CartProvider =({children}) => {
             }
             }  )
             setCart(updatedCart)
+            local(cart)
      }
     }
     //  iteracion sobre el carrito
@@ -46,12 +47,15 @@ export const CartProvider =({children}) => {
    const removeItem =(id)=>{
     const cartUpdated = cart.filter(prod=> prod.id!== id)
     setCart(cartUpdated)
+    localSet(cart)
    }
 
 
 
    const clearCart = () => {
     setCart([])
+
+    const localSet =(data) => localStorage.setItem('carrito',JSON.stringify(data))
 }
 
  return (
