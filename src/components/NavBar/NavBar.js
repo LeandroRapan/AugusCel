@@ -54,7 +54,8 @@ const NavBar = () => {
                 user ?(
                     // CARTWIDGET
                     <CartWidget  />
-                ) : ( <NavLink to='/login'>login</NavLink>)
+                    
+                ) : ( <NavLink className="nav-item btn btn-lg"to='/login'>login</NavLink>)
                 }
                 
                 

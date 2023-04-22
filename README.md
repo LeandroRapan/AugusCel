@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+## AugusCel
+Un e.commerce creado a partir de REACT y con base de datos en firebase.
+los componentes están dividios entre los que son de ejecución y los que tienen que escribir sobre el DOM.
+en el encontramos el listado general de productos, al hacer click sobre uno que nos interese, vamos a ver sus detalles. Si el mismo modelo tiene diferentes tipos o colores, se selecciona esto; la cantidad.
+El cart, donde uno puede ver el listado de productos a comprar.
+El checkout donde se realiza la orden y se guarda en base de datos. COmo el dominio esta enfocado para una ciudad en particular, se pueden relizar pagos contra reembolso en la misma. Pero, si se decide por un pago con tarjeta (lo que habilita el envio con correo a todo el pais), se despliega del formulario un menu desplegable. Idealmentee este menu deberia ser un formulario aparte donde se compre con tarjeta directamente usando los servicios de un banco... como no se hacer eso, por ahora, a modo de prototipo, el mismo formulario que genera la orden guarda los datos de la tarjeta en el servidor.
+tiene un sistema de log-in que permite hacer una cuenta con us/pass como tambien entrar con la cuenta de google.
+los datos de inicio de sesion se guardan en un session storage y carrito, aunque este ultimo me gustaria que si esta log el usuario se acceda al local storage.
+EN la orden se valida la compra desde un usuario activo logeado, sin embargo la pagina permite compras desde sin login. La idea es que los usuarios consigan beneficios especiales como el acceso a compras mayoristas o incluso formar parte de una red de distribucion en el futuro. Los usuarios tienen ya acceso a una wishlist y a un apartado mis compras donde puedan revisar sus ordenes, idealmente aqui se agregaria el codigo de seguimiento del producto por coreo, el id de la compra. Los usuarios no resgistrados pueden revisar lo mismo buscando el pedido llenando el form dentro del apartado mis compras.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Los componentes son:
+ [Item]
+item detail
+item detail container se comunica con el servidor buscando el producto de la id correspondiente, si no lo encuentra devuelve una notificacion de error
+item list
+item list container
+cart
+cartwidget
+checkout
+counter
+login
+navbar
 
-## Available Scripts
+como context tiene
+auth cntext
+cart context
 
-In the project directory, you can run:
+tiene una carpeta con un unico archivo notification
+notification
 
-### `npm start`
+y en services tiene la configurcion de firebase
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Pensaba incluir un usuario con derechos de escritura que pudieran 
+hay variables de entorno para ajustar objetos. estan en la carpeta adaptadores.

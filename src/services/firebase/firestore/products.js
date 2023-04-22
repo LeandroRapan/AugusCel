@@ -1,6 +1,6 @@
 import { getDocs, collection, query, where, getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebaseConfig'
-
+import createAdaptedProductFromFirestore from '../../../adapters/createAdaptedProductFromFirestore'
 export const getProducts =(categoryId)=>{
     const productsRef = categoryId
     ? query(collection(db, 'products'), where ('category', '==', categoryId)) 
@@ -8,9 +8,7 @@ export const getProducts =(categoryId)=>{
     return getDocs(productsRef)
     .then (snapshot => {
     const productsAdapted = snapshot.docs.map(doc =>{
-    const data = doc.data()
-    
-        return {id: doc.id, ...data}
+    return createAdaptedProductFromFirestore(doc)
     })
     return productsAdapted
     })
@@ -27,8 +25,6 @@ export const getProductsById =(itemId)=>{
         const productAdapted = { id: snapshot.id, ...data}
         return productAdapted
     })
-    // getProductById(itemId)
-    // .then(res=>{setProduct(res)})
-    // CREAR MENSAJE DE ERROR
+  
     .catch(error =>{return error})
 }

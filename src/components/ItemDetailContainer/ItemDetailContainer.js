@@ -10,9 +10,11 @@ const ItemDetailContainer =() =>{
     const [product, setProduct] = useState(null)
     // como es una llamada externa y quiero protegerla de cambios de estado uso un useEffect
    const {itemId}= useParams();
+   const [loading, setLoading]= useState(true)
    //use effect para cargar los productos y cambiar el state, lo que generara un render
    const {setNotification} =useNotification()
    useEffect (()=> {
+    setLoading(true)
     getProductsById(itemId)
     .then((product) => {
       setProduct(product);
@@ -21,12 +23,18 @@ const ItemDetailContainer =() =>{
     .catch((error) => {
       console.log(error);
       setNotification('error', error.message);
-    });
+    })
+    .finally(()=>{
+        setLoading(false)})
 }, []);
         
     
             
-            
+if (loading){
+    return(
+       <h1>Cargando...</h1> 
+    )
+}      
     //     })
     //     .catch(error=>{ console.log(error)
     //         {setNotification('error', error)}

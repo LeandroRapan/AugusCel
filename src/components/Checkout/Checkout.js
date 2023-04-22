@@ -13,8 +13,7 @@ const Checkout = () => {
     const { cart, total, clearCart } = useContext(CartContext)
     
     const { user, email } = useAuth()
-console.log(user)
-console.log(email)
+
     const { setNotification } = useNotification()
     
     function cambiarFormulario(e) {
@@ -28,13 +27,7 @@ console.log(email)
 
 
     
-//  const payment= {
-//                     payment: formCheckData.target.payment.value,
-//                     number: formCheckData.target.creditNumber.value,
-//                     name:  formCheckData.target.creditName.value,
-//                     expires:  formCheckData.target.expiration.value,
-//                     cvv: formCheckData.target.cvv.value,
-//                 }
+
 
 
 let payment = {};
