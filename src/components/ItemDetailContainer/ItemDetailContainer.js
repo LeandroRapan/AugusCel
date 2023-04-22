@@ -2,9 +2,8 @@ import { useState,useEffect  } from "react"
 // import {getProductById} from "../../asyncMock"
 import {useParams} from 'react-router-dom'
 import ItemDetail from "../ItemDetail/ItemDetail"
-import { getDoc, doc } from "firebase/firestore"
-import { db } from "../../services/firebase/firebaseConfig"
 import { useNotification } from "../../notification/Notification"
+import { getProductsById } from "../../services/firebase/firestore/products"
 
 const ItemDetailContainer =() =>{
     // la respuesta se guarda en un estado para que pueda hacerr rerender. Va a empezar en null
@@ -14,20 +13,26 @@ const ItemDetailContainer =() =>{
    //use effect para cargar los productos y cambiar el state, lo que generara un render
    const {setNotification} =useNotification()
    useEffect (()=> {
-        const productRef = doc(db,'products', itemId)
+    getProductsById(itemId)
+    .then((product) => {
+      setProduct(product);
+      if(!product.name){setNotification('error', 'El producto no existe')}
+    })
+    .catch((error) => {
+      console.log(error);
+      setNotification('error', error.message);
+    });
+}, []);
         
-        getDoc(productRef)
-        .then(snapshot=>{
-            const data = snapshot.data()
-            if(!data){setNotification('error','el producto no existe')}
-            const productAdapted = { id: snapshot.id, ...data}
-            setProduct(productAdapted)
-        })
-        // getProductById(itemId)
-        // .then(res=>{setProduct(res)})
-        // CREAR MENSAJE DE ERROR
-        .catch(error =>{console.log(error)})
-    }, [])
+    
+            
+            
+    //     })
+    //     .catch(error=>{ console.log(error)
+    //         {setNotification('error', error)}
+    //    })
+        
+    // }, [])
    //generación del div en el que estaá itemDetail
     return(
         <div>

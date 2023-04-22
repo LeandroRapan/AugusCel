@@ -12,7 +12,7 @@ import ItemCount from "../ItemCount/ItemCount"
    const [quantity, setQuantity]= useState(0)
    const {addItem, isInCart} = useContext(CartContext)
 const {setNotification} = useNotification()
-console.log(isInCart('o4ODW3HtNTY0t5Sm2p7z'))
+
   const handleOnAdd = (quantity)=>{
     const productToAdd = {
     id, name, price, quantity 
